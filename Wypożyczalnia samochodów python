@@ -1,0 +1,46 @@
+class Customer:
+    def __init__(self, name, phone):
+        self.name = name
+        self.phone = phone
+
+    def contact(self):
+        print(f"Klient: {self.name}, Telefon: {self.phone}")
+
+
+class Car:
+    def __init__(self, model, car_type, daily_rate):
+        self.model = model
+        self.car_type = car_type
+        self.daily_rate = daily_rate
+
+    def display_info(self):
+        print(f"Samochód: {self.model} ({self.car_type}), Stawka dzienna: {self.daily_rate} zł")
+
+
+class Rental:
+    def __init__(self, car, customer, days):
+        self.car = car
+        self.customer = customer
+        self.days = days
+
+    def calculate_cost(self):
+        return self.car.daily_rate * self.days
+
+    def display_rental_info(self):
+        print("=== Rezerwacja ===")
+        self.car.display_info()
+        self.customer.contact()
+        print(f"Liczba dni: {self.days}, Koszt całkowity: {self.calculate_cost()} zł")
+
+
+# Przykładowe użycie:
+customer1 = Customer("Jan Nowak", "111-222-333")
+car1 = Car("Toyota Yaris", "Ekonomiczny", 100)
+car2 = Car("BMW X5", "SUV", 250)
+
+rental1 = Rental(car1, customer1, 5)
+rental2 = Rental(car2, Customer("Ewa Kowalska", "444-555-666"), 3)
+
+rental1.display_rental_info()
+print()
+rental2.display_rental_info()
