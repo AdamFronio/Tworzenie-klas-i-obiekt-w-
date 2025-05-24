@@ -1,0 +1,82 @@
+using System;
+
+class Customer
+{
+    public string Name { get; set; }
+    public string Phone { get; set; }
+
+    public Customer(string name, string phone)
+    {
+        Name = name;
+        Phone = phone;
+    }
+
+    public void Contact()
+    {
+        Console.WriteLine($"Klient: {Name}, Telefon: {Phone}");
+    }
+}
+
+class Car
+{
+    public string Model { get; set; }
+    public string Type { get; set; } // np. "Ekonomiczny", "SUV", "Luksusowy"
+    public double DailyRate { get; set; }
+
+    public Car(string model, string type, double dailyRate)
+    {
+        Model = model;
+        Type = type;
+        DailyRate = dailyRate;
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Samochód: {Model} ({Type}), Stawka dzienna: {DailyRate} zł");
+    }
+}
+
+class Rental
+{
+    public Car Car { get; set; }
+    public Customer Customer { get; set; }
+    public int Days { get; set; }
+
+    public Rental(Car car, Customer customer, int days)
+    {
+        Car = car;
+        Customer = customer;
+        Days = days;
+    }
+
+    public double CalculateCost()
+    {
+        return Car.DailyRate * Days;
+    }
+
+    public void DisplayRentalInfo()
+    {
+        Console.WriteLine("=== Rezerwacja ===");
+        Car.DisplayInfo();
+        Customer.Contact();
+        Console.WriteLine($"Liczba dni: {Days}, Koszt całkowity: {CalculateCost()} zł");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Customer customer1 = new Customer("Jan Nowak", "111-222-333");
+        Car car1 = new Car("Toyota Yaris", "Ekonomiczny", 100);
+        Car car2 = new Car("BMW X5", "SUV", 250);
+
+        Rental rental1 = new Rental(car1, customer1, 5);
+        Rental rental2 = new Rental(car2, new Customer("Ewa Kowalska", "444-555-666"), 3);
+
+        rental1.DisplayRentalInfo();
+        Console.WriteLine();
+
+        rental2.DisplayRentalInfo();
+    }
+}
